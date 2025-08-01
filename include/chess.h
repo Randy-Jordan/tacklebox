@@ -6,8 +6,15 @@
 #define U64 unsigned long long
 extern const char *start_pos;  
 
-enum { white, black, both };
 
+enum { white, black, both };
+enum {
+    UNICODE     = 1 << 0, // 1
+    ASCII       = 1 << 1, // 2
+    PRINT_CORDS = 1 << 2, // 4
+    PRINT_INFO  = 1 << 3  // 8
+
+};
 // Squares 
 enum Squares {
     a8, b8, c8, d8, e8, f8, g8, h8,
@@ -26,8 +33,6 @@ extern const char *squares_to_coordinates[];
 enum Pieces { P, N, B, R, Q, K, p, n, b, r, q, k };
 enum { wk = 1, wq = 2, bk = 4, bq = 8 };
 
-extern char ascii_pieces[12];  
-extern char *unicode_pieces[12];  
 extern int char_pieces[256];  
 extern char promoted_pieces[256];  
 
@@ -58,7 +63,7 @@ U64 rnd64(U64 n);
 void init_zhasher(ZHasher *ht);
 U64 generate_hash(Gamestate *gs, ZHasher *h);
 void parse_fen(char *fen, Gamestate *gs);
-void print_state(Gamestate *g, ZHasher *z);
-
-
+void print_state(Gamestate *g, ZHasher *z, int flags);
+void print_info(Gamestate *g, ZHasher *z);
+void print_piece(int piece, int flags);
 #endif

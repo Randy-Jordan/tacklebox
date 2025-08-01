@@ -8,6 +8,6 @@ int main(void){
     init_zhasher(&z);
     Gamestate g;
     parse_fen((char *)start_pos,&g);
-    print_state(&g,&z);
+    print_state(&g,&z,0);
     return EXIT_SUCCESS;
 }
